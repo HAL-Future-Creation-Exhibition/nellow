@@ -1,0 +1,17 @@
+{
+  "apps": [{
+    "name": "nellow",
+    "script": "build/server.js",
+    "exec_mode": "cluster_mode",
+    "restart_delay": 500,
+    "merge_logs": true,
+    "log_date_format": "YYYY-MM-DD HH:mm Z",
+    "watch": [
+      "build"
+    ],
+    "watch_options": {
+      "followSymlinks": true
+    },
+    "interpreter_args": "--harmony --no-warnings --inspect"
+  }]
+}
