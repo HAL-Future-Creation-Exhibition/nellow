@@ -14,11 +14,8 @@ RootRouter.route('/user')
         text: "user get"
     });
 });
-RootRouter.get('/nellow/create', (req, res) => {
-    nellow_1.default.get(req, res);
-});
-RootRouter.get('/nellow/connect/:nellowId', (req, res) => {
-    nellow_1.default.connect(req, res);
+RootRouter.get('/create', (req, res) => {
+    nellow_1.default.create(req, res);
 });
 exports.default = RootRouter;
 //# sourceMappingURL=index.js.map

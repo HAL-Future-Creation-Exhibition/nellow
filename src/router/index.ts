@@ -16,13 +16,8 @@ RootRouter.route('/user')
     })
   })
 
-RootRouter.get('/nellow/create', (req, res) => {
-  nellowController.get(req, res)
+RootRouter.get('/create', (req, res) => {
+  nellowController.create(req, res)
 })
-
-RootRouter.get('/nellow/connect/:nellowId', (req, res) => {
-  nellowController.connect(req, res)
-})
-
 
 export default RootRouter;
