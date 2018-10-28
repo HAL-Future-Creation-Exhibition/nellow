@@ -4,6 +4,7 @@
     "allowUnusedLabels": true,
     "sourceMap": true,
     "noImplicitAny": false,
+    "jsx": "react",
     "module": "commonjs",
     "target": "ES2017",
     "outDir": "build",
