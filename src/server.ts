@@ -4,6 +4,7 @@ import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as methodOverride from "method-override";
 import * as path from "path";
+import migrate from "./migrations/migrate";
 
 // router
 import router from "./router";
@@ -20,7 +21,7 @@ var db = mongoose.connection;
 
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
+migrate.run();
 //// end 1
 
 app.use(bodyParser.json());

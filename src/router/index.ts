@@ -1,5 +1,6 @@
 import { Router } from "express";
 import nellowController from "../controllers/nellow";
+import userController from "../controllers/user";
 
 const RootRouter = Router();
 
@@ -9,11 +10,12 @@ RootRouter.get("/", (req, res) => {
   })
 })
 
-RootRouter.route('/user')
+RootRouter.route('/user/:userId')
   .get((req, res) => {
-    return res.json({
-      text: "user get"
-    })
+    userController.get(req, res)
+  })
+  .post((req, res) => {
+    userController.update(req, res)
   })
 
 RootRouter.get('/create', (req, res) => {

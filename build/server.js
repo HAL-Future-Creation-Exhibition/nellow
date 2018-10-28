@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const methodOverride = require("method-override");
 const path = require("path");
+const migrate_1 = require("./migrations/migrate");
 // router
 const router_1 = require("./router");
 const app = express();
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://127.0.0.1/nellow', { useMongoClient: true }); // 接
 var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+migrate_1.default.run();
 //// end 1
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

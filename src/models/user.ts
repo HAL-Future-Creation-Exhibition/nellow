@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema({
         max: 255,
         default: ""
     },
+    providing_destination_id: {
+        type: Number,
+        default: 1
+    },
     created_at: {
         type: Date,
         default: Date.now
