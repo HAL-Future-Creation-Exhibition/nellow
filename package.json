@@ -20,12 +20,14 @@
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.3",
+    "d3-ease": "^1.0.5",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "method-override": "^3.0.0",
     "nodemon": "^1.18.5",
     "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "react-dom": "^16.6.0",
+    "react-move": "^2.8.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

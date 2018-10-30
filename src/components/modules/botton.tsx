@@ -9,7 +9,7 @@ export default class Button extends React.Component<Props> {
 
   render() {
     return (
-      <button onClick={this.props.updateSleepStatus(!this.props.sleeping)}>{this.props.sleeping ? "起きる" : "寝る"}</button>
+      <button className={`wakeup-sleep-button status-${this.props.sleeping ? 'sleep' : 'stayup'}`} onClick={this.props.updateSleepStatus(!this.props.sleeping)} />
     )
   }
 
