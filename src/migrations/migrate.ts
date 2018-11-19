@@ -2,7 +2,7 @@ import ProvidingDestination from '../models/providingDestination'
 
 class Migrate {
     run() {
-        var promise = ProvidingDestination.remove({})
+        var promise = ProvidingDestination.deleteMany({})
         promise.then((doc) => {
             var destinations = [
                 {

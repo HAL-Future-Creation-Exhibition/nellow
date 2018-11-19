@@ -10,10 +10,12 @@ const migrate_1 = require("./migrations/migrate");
 // router
 const router_1 = require("./router");
 const app = express();
+require('dotenv').config();
 //// 1. mongoose connection
 var mongoose = require('mongoose'); // mongoose 利用
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://127.0.0.1/nellow', { useMongoClient: true }); // 接続
+mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true }); // 接続
+console.log(process.env.DB_HOST);
 //Get the default connection
 var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)

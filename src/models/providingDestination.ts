@@ -1,5 +1,4 @@
 import * as  mongoose from 'mongoose';
-import * as UUID from 'uuid';
 import IProvidingDestinationDocument from '../interfaces/IProvidingDestinationDocument'
 const ProvidingDestinationSchema = new mongoose.Schema({
     _id: {

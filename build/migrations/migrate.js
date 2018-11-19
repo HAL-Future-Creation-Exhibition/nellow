@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const providingDestination_1 = require("../models/providingDestination");
 class Migrate {
     run() {
-        var promise = providingDestination_1.default.remove({});
+        var promise = providingDestination_1.default.deleteMany({});
         promise.then((doc) => {
             var destinations = [
                 {
