@@ -4,6 +4,10 @@ import * as React from "react";
 import Sleep from "./pages/sleep";
 import Stayup from "./pages/stayup";
 import Header from "./modules/Header";
+import Bank from "./pages/bank";
+import Settings from "./pages/settings";
+
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 interface State {
   sleeping: boolean;
@@ -30,8 +34,13 @@ export default class App extends React.Component<{}, State> {
     return (
       <div className={`app-container ${this.state.sleeping ? 'sleep' : 'stayup'}`}>
         <Header status={this.state.sleeping} />
-        {/* <Bank /> */}
-        <Comp />
+        <BrowserRouter>
+          <Switch>
+            <Route exact={true} path="/" component={Comp} />
+            <Route exact={true} path="/bank" component={Bank}/>
+            <Route exact={true} path="/settings" component={Settings}/>
+          </Switch>
+        </BrowserRouter>
         {/* <ToggleButton sleeping={this.state.sleeping} updateSleepStatus={this.updateSleepStatus}  /> */}
       </div>
     )

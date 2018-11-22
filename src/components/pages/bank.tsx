@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export default class Bank extends React.Component {
-  render() {
+  public render() {
     return (
       <div className="bank-container">
 
