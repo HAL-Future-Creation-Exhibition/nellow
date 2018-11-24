@@ -1,19 +1,15 @@
 import * as React from "react";
 
 interface Props {
-  status: boolean;
   isShowBackButton: boolean;
+  to;
 }
 
-const browserBack = () => {
-  history.back();
-}
-
-const Header: React.StatelessComponent<Props> = ({ status, isShowBackButton }) => {
+const Header: React.StatelessComponent<Props> = ({ isShowBackButton, to }) => {
   return (
-    <header className={status ? 'header-sleep' : 'header-stayup'}>
+    <header className={isShowBackButton ? 'header-sleep' : 'header-stayup'}>
       {isShowBackButton ? (
-        <div className="back-button" onClick={browserBack}>
+        <div className="back-button" onClick={() => to("/")}>
           <i className="fas fa-angle-left" />
         </div>
       ) : null}

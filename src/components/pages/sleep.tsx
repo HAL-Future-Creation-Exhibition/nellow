@@ -4,8 +4,8 @@ interface IProps {
   backButtonHandler: (show: boolean) => void;
 }
 
-export default class Sleep extends React.Component<IProps> {
-  render() {
+class Sleep extends React.Component<IProps> {
+  public render() {
     return (
       <div className="sleep-container">
         <h1>Good Night</h1>
@@ -13,3 +13,5 @@ export default class Sleep extends React.Component<IProps> {
     )
   }
 }
+
+export default Sleep;
