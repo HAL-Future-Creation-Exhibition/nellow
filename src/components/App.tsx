@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 interface State {
   sleeping: boolean;
+  isShowBackButton: boolean;
 }
 
 export default class App extends React.Component<{}, State> {
@@ -19,7 +20,8 @@ export default class App extends React.Component<{}, State> {
     super(props);
 
     this.state = {
-      sleeping: false
+      sleeping: false,
+      isShowBackButton: false
     }
   }
 
@@ -29,19 +31,24 @@ export default class App extends React.Component<{}, State> {
     })
   };
 
+  backButtonHandler = (show: boolean) => {
+    this.setState({
+      isShowBackButton: show
+    })
+  }
+
   render() {
     const Comp = this.state.sleeping ? Sleep : Stayup;
     return (
       <div className={`app-container ${this.state.sleeping ? 'sleep' : 'stayup'}`}>
-        <Header status={this.state.sleeping} />
+        <Header status={this.state.sleeping} isShowBackButton={this.state.isShowBackButton} />
         <BrowserRouter>
           <Switch>
-            <Route exact={true} path="/" component={Comp} />
-            <Route exact={true} path="/bank" component={Bank}/>
-            <Route exact={true} path="/settings" component={Settings}/>
+            <Route exact={true} path="/" render={() => <Comp backButtonHandler={this.backButtonHandler} />} />
+            <Route exact={true} path="/bank" render={() => <Bank backButtonHandler={this.backButtonHandler} />} />
+            <Route exact={true} path="/settings" render={() => <Settings backButtonHandler={this.backButtonHandler} />} />
           </Switch>
         </BrowserRouter>
-        {/* <ToggleButton sleeping={this.state.sleeping} updateSleepStatus={this.updateSleepStatus}  /> */}
       </div>
     )
   }

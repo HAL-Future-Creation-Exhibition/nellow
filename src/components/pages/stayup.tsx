@@ -8,7 +8,11 @@ interface IState {
   menuIn: boolean;
 }
 
-export default class Stayup extends React.Component<any, IState> {
+interface IProps {
+  backButtonHandler: (show: boolean) => void;
+}
+
+export default class Stayup extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,6 +39,7 @@ export default class Stayup extends React.Component<any, IState> {
         }
       })
     }, 1000)
+    this.props.backButtonHandler(false);
   }
 
   onCloseMenu = () => {

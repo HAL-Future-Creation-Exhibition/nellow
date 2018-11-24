@@ -1,6 +1,23 @@
 import * as React from "react";
 
-export default class Settings extends React.Component {
+interface IProps {
+  backButtonHandler: (show: boolean) => void;
+}
+
+export default class Settings extends React.Component<IProps> {
+
+  constructor(props) {
+    super(props);
+  }
+
+  public componentDidMount() {
+    this.props.backButtonHandler(true);
+  }
+
+  public componentWillUnmount() {
+    this.props.backButtonHandler(false);
+  }
+
   public render() {
     return (
       <div className="settings-container">
