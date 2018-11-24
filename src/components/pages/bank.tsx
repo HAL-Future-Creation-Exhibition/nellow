@@ -46,7 +46,7 @@ class Bank extends React.Component<IProps, IState> {
   public save = () => {
     const { bank } = this.state;
     localStorage.setItem(BANK_INFO_STORAGE_KEY, JSON.stringify(bank));
-    location.href = "/";
+    this.props.history.push("/");
   }
 
   public render() {
