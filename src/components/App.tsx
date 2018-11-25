@@ -23,11 +23,29 @@ export default class App extends React.Component<{}, State> {
     }
   }
 
+  componentDidMount() {
+    window.addEventListener("deviceorientation", this.deviceorientationHandler);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("deviceorientation", this.deviceorientationHandler);
+  }
+
   updateSleepStatus = (status: boolean) => () => {
     this.setState({
       sleeping: status
     })
   };
+
+  deviceorientationHandler = (e) => {
+    let { beta } = e;
+    if(beta < 0) {
+      beta *= -1;
+    }
+    this.setState({
+      sleeping: !!(beta >= 150)
+    })
+  }
 
   render() {
     const Comp = this.state.sleeping ? Sleep : Stayup;
