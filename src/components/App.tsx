@@ -3,9 +3,9 @@ import * as React from "react";
 // components
 import Sleep from "./pages/sleep";
 import Stayup from "./pages/stayup";
-import Header from "./modules/Header";
 import Bank from "./pages/bank";
 import Settings from "./pages/settings";
+import NotFound from "./pages/NotFound";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -56,6 +56,7 @@ export default class App extends React.Component<{}, State> {
             <Route exact={true} path="/" component={Comp} />
             <Route exact={true} path="/bank" component={Bank} />
             <Route exact={true} path="/settings" component={Settings} />
+            <Route path="*" component={NotFound} />
           </Switch>
         </BrowserRouter>
       </div>
