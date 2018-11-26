@@ -30,7 +30,9 @@
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-move": "^2.8.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "react-swipe": "^6.0.3",
+    "swipe-js-iso": "^2.1.4"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

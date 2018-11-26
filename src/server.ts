@@ -27,7 +27,7 @@ app.use(router);
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "ejs");
 
-const HOST = process.env.HOST || "127.0.0.1";
+const HOST = process.env.HOST || "0.0.0.0";
 const PORT = process.env.PORT || "3000";
 app.listen(parseInt(PORT, 10), HOST, () => {
   console.log.apply(console, [`NODE_ENV: ${process.env.NODE_ENV}`])

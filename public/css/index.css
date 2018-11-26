@@ -597,3 +597,80 @@ header h1 {
   background-color: #616161;
   border-radius: 50px;
 }
+
+.guide-container {
+  width: 90%;
+  margin: 5vh auto;
+}
+.guide-container .guide-view {
+  height: 70vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.guide-container .next-button {
+  border: 0;
+  outline: none;
+  display: block;
+  width: 55%;
+  padding: 20px;
+  border-radius: 50px;
+  background-color: #29B6F6;
+  margin: 20px auto;
+  color: white;
+  letter-spacing: 4px;
+}
+.guide-container .skip-button {
+  border: 0;
+  outline: none;
+  display: block;
+  width: 55%;
+  padding: 20px;
+  margin: 20px auto;
+  background-color: transparent;
+  letter-spacing: 4px;
+}
+.guide-container .start-button {
+  border: 0;
+  outline: none;
+  display: block;
+  width: 55%;
+  border-radius: 50px;
+  background-color: #29B6F6;
+  margin: 20px auto;
+  padding: 20px;
+  letter-spacing: 4px;
+  color: white;
+  font-weight: bold;
+}
+.guide-container .guide-view h2 {
+  margin: 10px 0;
+  font-family: "Lato", sans-serif;
+}
+.guide-container .guide-view .img {
+  width: 90%;
+  margin: 10px 0;
+}
+.guide-container .guide-view .img img {
+  display: block;
+  width: 100%;
+}
+.guide-container .guide-view p {
+  word-break: break-all;
+  font-family: "Lato", sans-serif;
+  font-size: 1.1rem;
+  line-height: 2;
+  letter-spacing: 3px;
+}
+.guide-container .guide-view input {
+  border: 0;
+  outline: none;
+  padding: 10px;
+  display: block;
+  margin: 50px 0;
+  width: 80%;
+  border-bottom: 1px solid gray;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+}

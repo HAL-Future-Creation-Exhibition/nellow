@@ -5,6 +5,7 @@ import Sleep from "./pages/sleep";
 import Stayup from "./pages/stayup";
 import Bank from "./pages/bank";
 import Settings from "./pages/settings";
+import OnBording from "./pages/Onbording";
 import NotFound from "./pages/NotFound";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -56,6 +57,7 @@ export default class App extends React.Component<{}, State> {
             <Route exact={true} path="/" component={Comp} />
             <Route exact={true} path="/bank" component={Bank} />
             <Route exact={true} path="/settings" component={Settings} />
+            <Route path="/guide" component={OnBording} />
             <Route path="*" component={NotFound} />
           </Switch>
         </BrowserRouter>
