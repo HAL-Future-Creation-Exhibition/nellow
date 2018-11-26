@@ -11,7 +11,7 @@ class OnBording extends React.Component<any, State> {
     super(props);
 
     this.state = {
-      currentView: 1,
+      currentView: 2,
       name: "モモノスケ"
     }
   }
@@ -20,6 +20,10 @@ class OnBording extends React.Component<any, State> {
     this.setState({
       name: e.target.value
     })
+  }
+
+  public onStartHandler = () => {
+
   }
 
   public render() {
@@ -54,7 +58,7 @@ class OnBording extends React.Component<any, State> {
             </p>
           </div>
         </OnbordingSlider>
-        {this.state.currentView !== 3 ? (
+        {this.state.currentView !== 2 ? (
           <button className="next-button">NEXT</button>
         ) : (
           <button className="start-button">START</button>

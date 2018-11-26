@@ -23,7 +23,8 @@ class OnbordingSlider extends React.Component<any, State> {
     const { children } = this.props;
     const options = {
       continuous: false,
-      disableScroll: true
+      disableScroll: true,
+      startSlide: 2
     }
 
     return (
