@@ -1,4 +1,5 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, AxiosPromise } from "axios";
+import { User } from "../model/type";
 
 class Http {
   private http: AxiosInstance;
@@ -14,7 +15,7 @@ class Http {
   /**
    * user create
    */
-  public postCreateUser() {
+  public postCreateUser(): AxiosPromise<User> {
     return this.http.post("/users", {
       is_nellow: location.pathname === "/nellow/create"
     })
@@ -30,16 +31,16 @@ class Http {
   /**
    * patch icon
    */
-  public patchIcon(id, file) {
-    return this.http.patch(`/users/${id}/icon`, {
-      icon: file
-    })
+  public patchIcon(id, file): AxiosPromise<User> {
+    const fd = new FormData();
+    fd.append("icon", file);
+    return this.http.patch(`/users/${id}/icon`, fd)
   }
 
   /**
    * patch user info
    */
-  public patchUserInfo(id, name, service_index) {
+  public patchUserInfo(id, name, service_index): AxiosPromise<User> {
     return this.http.patch(`/users/${id}`, {
       name,
       p_id: service_index

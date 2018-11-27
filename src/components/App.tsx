@@ -57,7 +57,8 @@ export default class App extends React.Component<{}, State> {
             <Route exact={true} path="/" component={Comp} />
             <Route exact={true} path="/bank" component={Bank} />
             <Route exact={true} path="/settings" component={Settings} />
-            <Route path="/guide" component={OnBording} />
+            <Route exact={true} path="/user/create" component={OnBording} />
+            <Route exact={true} path="/nellow/create" component={OnBording} />
             <Route path="*" component={NotFound} />
           </Switch>
         </BrowserRouter>

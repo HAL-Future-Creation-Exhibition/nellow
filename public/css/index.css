@@ -106,12 +106,12 @@ header h1 {
 }
 .stayup-container .icon {
   width: 80px;
+  height: 80px;
   border-radius: 50%;
   overflow: hidden;
-}
-.stayup-container .icon img {
-  display: block;
-  width: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .stayup-container .main-content {
   width: 100%;
@@ -442,13 +442,16 @@ header h1 {
   background-color: #E0E0E0;
 }
 .edit-view-container .service-list {
-  width: 90%;
-  margin: 20px auto;
+  width: 100%;
+  margin: 40px auto 20px;
 }
 .edit-view-container .service-list li {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 15px 20px;
+}
+.edit-view-container .service-list li.selected {
+  background-color: rgb(225, 225, 225);
 }
 .edit-view-container .service-list li .img {
   width: 25px;
@@ -485,9 +488,12 @@ header h1 {
   height: 150px;
   position: relative;
 }
-.settings-container .main-content .icon img {
-  display: block;
-  width: 100%;
+.settings-container .main-content .icon .icon-img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 }
 .settings-container .main-content .icon .camera-icon {
@@ -552,7 +558,7 @@ header h1 {
   outline: none;
   color: white;
   width: 40%;
-  padding: 10px;
+  padding: 15px 10px;
   border-radius: 50px;
   margin: 0 10px;
   font-family: "Lato", sans-serif;

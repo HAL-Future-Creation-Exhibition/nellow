@@ -1,19 +1,46 @@
 import * as React from "react";
 import OnbordingSlider from "../modules/OnbordingSlider";
+import http from "../../api/http";
+import db from "../../lib/db";
+import { withRouter } from "react-router-dom";
+// import * as io from "socket.io-client";
+
+interface Props {
+  history;
+}
 
 interface State {
   currentView: number;
   name: string;
 }
 
-class OnBording extends React.Component<any, State> {
+class OnBording extends React.Component<Props, State> {
+  private reactSwipe;
   constructor(props) {
     super(props);
 
     this.state = {
-      currentView: 2,
+      currentView: 0,
       name: "モモノスケ"
     }
+  }
+
+  componentWillMount() {
+    if(db.getUser()) {
+      location.href = "/";
+    }
+  }
+
+  // public componentDidMount() {
+  //   const socket = io("https://socket.patra.store", {
+  //     transports: ["websocket"]
+  //   });
+  //   socket.on("hoge", (data) => {
+  //     console.log(data);
+  //   })
+  // }
+  public setReactSwipe = (reactSwipe) => {
+    this.reactSwipe = reactSwipe;
   }
 
   public onInputChangeHandler = (e) => {
@@ -22,14 +49,23 @@ class OnBording extends React.Component<any, State> {
     })
   }
 
-  public onStartHandler = () => {
+  public onStartHandler = async () => {
+    const res = await http.postCreateUser()
+    db.setUser(res.data);
+    this.props.history.push("/");
+  }
 
+  public onNextHandler = () => {
+    this.reactSwipe.next()
+    this.setState({
+      currentView: this.state.currentView + 1
+    })
   }
 
   public render() {
-    return (
+    return db.getUser() ? null : (
       <div className="guide-container">
-        <OnbordingSlider>
+        <OnbordingSlider setReactSwipe={this.setReactSwipe}>
           <div className="guide-view">
             <h2>ようこそ、nellowへ！</h2>
             <div className="img">
@@ -59,13 +95,13 @@ class OnBording extends React.Component<any, State> {
           </div>
         </OnbordingSlider>
         {this.state.currentView !== 2 ? (
-          <button className="next-button">NEXT</button>
+          <button className="next-button" onClick={this.onNextHandler}>NEXT</button>
         ) : (
-          <button className="start-button">START</button>
+          <button className="start-button" onClick={this.onStartHandler}>START</button>
         )}
       </div>
     )
   }
 }
 
-export default OnBording;
+export default withRouter(OnBording);

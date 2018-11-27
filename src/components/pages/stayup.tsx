@@ -4,10 +4,14 @@ import { TweenMax, Power3 } from "gsap";
 import EditView from "../modules/EditView";
 import { withRouter } from "react-router-dom";
 import Header from "../modules/Header";
+import db from "../../lib/db";
+import { User } from "../../model/type";
+import http from "../../api/http";
 
 interface IState {
   amount: number;
   menuIn: boolean;
+  user: User;
 }
 
 interface IProps {
@@ -19,14 +23,22 @@ class Stayup extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       amount: 0,
-      menuIn: false
+      menuIn: false,
+      user: db.getUser()
+    }
+  }
+
+  componentWillMount() {
+    if(!this.state.user) {
+      location.href = "/user/create";
     }
   }
 
   componentDidMount() {
+    this.getUserInfo();
     setTimeout(() => {
       const from = 0;
-      const to = 99000;
+      const to = 0;
       let obj = {
         amount: from
       }
@@ -49,7 +61,23 @@ class Stayup extends React.Component<IProps, IState> {
     })
   }
 
+  getUserInfo = async () => {
+    const { id } = this.state.user
+    const res = await http.getUser(id);
+    db.setUser(res.data);
+    this.setState({ user: res.data });
+  }
+
+  selectService = (service_id) => async () => {
+    const { user } = this.state;
+    const res = await http.patchUserInfo(user.id, user.name, service_id);
+    db.setUser(res.data);
+    this.setState({ user: res.data });
+    this.onCloseMenu();
+  }
+
   render() {
+    const { user } = this.state
     return (
       <>
         <Header isShowBackButton={location.pathname !== "/"} to={this.props.history.push} />
@@ -57,17 +85,15 @@ class Stayup extends React.Component<IProps, IState> {
 
           <div className="head-content">
             <div className="names">
-              <p className="name">オタクくん</p>
-              <p className="nellow-id">ID: asfoi</p>
+              <p className="name">{user.name}</p>
+              <p className="nellow-id">ID: {user.id.slice(0, 8)}</p>
             </div>
-            <div className="icon">
-              <img src="https://pbs.twimg.com/profile_images/1021820533946499072/bfHxPQ39_400x400.jpg" alt=""/>
-            </div>
+            <div className="icon" style={{ backgroundImage: `url(${user.icon})` }} />
           </div>
 
           <div className="main-content">
             <p className="amount-title">残高</p>
-            <p className="amount" id="amount" data-from={0} data-to={10000}>¥<span>{this.state.amount.toLocaleString()}</span></p>
+            <p className="amount" id="amount">¥<span>{this.state.amount.toLocaleString()}</span></p>
             <p className="description">
               貢献して得たお金は月末に確定し<br/>
               売り上げとして反映されます。
@@ -113,7 +139,7 @@ class Stayup extends React.Component<IProps, IState> {
             </div>
           </div>
 
-          <EditView onCloseMenu={this.onCloseMenu} in={this.state.menuIn}/>
+          <EditView onCloseMenu={this.onCloseMenu} in={this.state.menuIn} selectService={this.selectService} currentService={user.providing_destination.id} />
         </div>
       </>
     )

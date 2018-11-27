@@ -1,12 +1,15 @@
 import * as React from "react";
 import * as ReactSwipe from "react-swipe";
 
+interface Props {
+  setReactSwipe: (el) => void;
+}
+
 interface State {
   windowWidth: number;
 }
 
-class OnbordingSlider extends React.Component<any, State> {
-  private reactSwipe;
+class OnbordingSlider extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
@@ -15,23 +18,19 @@ class OnbordingSlider extends React.Component<any, State> {
     }
   }
 
-  public onHandleNext = () => {
-    this.reactSwipe.next();
-  };
-
   public render() {
     const { children } = this.props;
     const options = {
       continuous: false,
       disableScroll: true,
-      startSlide: 2
+      startSlide: 0
     }
 
     return (
       <ReactSwipe
         className="carousel"
         swipeOptions={options}
-        ref={reactSwipe => (this.reactSwipe = reactSwipe)}
+        ref={reactSwipe => (this.props.setReactSwipe(reactSwipe))}
       >
         {children}
       </ReactSwipe>
