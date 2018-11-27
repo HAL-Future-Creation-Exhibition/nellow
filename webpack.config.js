@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const CleanPlugin = require('clean-webpack-plugin');
+const workboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   target: 'web',
@@ -33,6 +34,26 @@ module.exports = {
   },
   stats: "minimal",
   plugins: [
+    new workboxPlugin({
+      globDirectory: __dirname + "/public",
+      globPatterns: [
+        "js/**/*.js",
+        "css/**/*.css"
+      ],
+      runtimeCaching: [
+        {
+          urlPattern: /https:\/\/s3-us-west-2.amazonaws.com\/dinner-match\/nellow\/.+\.(png|gif|jpg|jpeg|svg)$/,
+          handler: 'cacheFirst',
+          options: {
+            cacheExpiration: {
+              maxAgeSeconds: 60 * 5,
+              maxEntries: 10
+            }
+          }
+        }
+      ],
+      swDest: dist + '/js/sw.js',
+    }),
     new CleanPlugin([
       "publis/js/*.js"
     ], {
