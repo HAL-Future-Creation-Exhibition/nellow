@@ -1,3 +1,4 @@
+const pkg = require("./package.json")
 const webpack = require("webpack");
 const path = require("path");
 const CleanPlugin = require('clean-webpack-plugin');
@@ -13,7 +14,7 @@ module.exports = {
   },
   entry: path.resolve(__dirname, "./src/client.tsx"),
   output: {
-    path: path.resolve(__dirname, "./public/js"),
+    path: path.resolve(__dirname, "./public/"),
     filename: "bundle.js",
     libraryTarget: "umd"
   },
@@ -34,28 +35,14 @@ module.exports = {
   },
   stats: "minimal",
   plugins: [
-    new workboxPlugin({
-      globDirectory: __dirname + "/public",
-      globPatterns: [
-        "js/**/*.js",
-        "css/**/*.css"
-      ],
-      runtimeCaching: [
-        {
-          urlPattern: /https:\/\/s3-us-west-2.amazonaws.com\/dinner-match\/nellow\/.+\.(png|gif|jpg|jpeg|svg)$/,
-          handler: 'cacheFirst',
-          options: {
-            cacheExpiration: {
-              maxAgeSeconds: 60 * 5,
-              maxEntries: 10
-            }
-          }
-        }
-      ],
-      swDest: dist + '/js/sw.js',
+    new workboxPlugin.GenerateSW({
+      cacheId: `nellow-${pkg.version}`,
+      clientsClaim: true,
+      skipWaiting: false,
+      swDest: __dirname + "/public/sw.js"
     }),
     new CleanPlugin([
-      "publis/js/*.js"
+      "publis/bundle.js"
     ], {
       verbose: true
     }),
