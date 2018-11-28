@@ -9,6 +9,9 @@ body, html {
   user-select: none;
   -webkit-user-select: none;
 }
+input {
+  font-size: 16px!important;
+}
 
 .app-container {
   width: 100%;
@@ -609,7 +612,6 @@ header h1 {
   margin: 5vh auto;
 }
 .guide-container .guide-view {
-  height: 70vh;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -676,6 +678,7 @@ header h1 {
   display: block;
   margin: 50px 0;
   width: 80%;
+  border-radius: 0;
   border-bottom: 1px solid gray;
   font-family: "Lato", sans-serif;
   font-size: 1.2rem;
