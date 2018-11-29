@@ -39,10 +39,54 @@ module.exports = {
       cacheId: `nellow-${pkg.version}`,
       clientsClaim: true,
       skipWaiting: false,
-      swDest: __dirname + "/public/sw.js"
+      swDest: __dirname + "/public/sw.js",
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp("https://cloud.google.com"),
+          handler: "cacheFirst",
+          options: {
+            cacheName: "google-cloud-image",
+            expiration: {
+              maxAgeSeconds: 60 * 5
+            }
+          }
+        },
+        {
+          urlPattern: new RegExp("https://use.fontawesome.com"),
+          handler: "cacheFirst",
+          options: {
+            cacheName: "font-awesome",
+            expiration: {
+              maxAgeSeconds: 60 * 5
+            }
+          }
+        },
+        {
+          urlPattern: /icon-.*/,
+          handler: "cacheFirst",
+          options: {
+            cacheName: "nellow-icons",
+            expiration: {
+              maxAgeSeconds: 60 * 5
+            }
+          }
+        },
+        {
+          urlPattern: /\.css$/,
+          handler: "cacheFirst",
+          options: {
+            cacheName: "css-cache",
+            expiration: {
+              maxAgeSeconds: 60 * 5
+            }
+          }
+        }
+      ]
     }),
     new CleanPlugin([
-      "publis/bundle.js"
+      "public/precache-manifest.*",
+      "public/sw.js",
+      "public/bundle.js"
     ], {
       verbose: true
     }),

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.61464f1be1aaa0a05cdff7b95769b889.js"
+  "precache-manifest.48a3500c1f0a73abc13f816e03b9380e.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "nellow-0.0.0"});
@@ -29,3 +29,8 @@ workbox.clientsClaim();
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
+workbox.routing.registerRoute(/https:\/\/cloud.google.com/, workbox.strategies.cacheFirst({ "cacheName":"google-cloud-image", plugins: [new workbox.expiration.Plugin({"maxAgeSeconds":300,"purgeOnQuotaError":false})] }), 'GET');
+workbox.routing.registerRoute(/https:\/\/use.fontawesome.com/, workbox.strategies.cacheFirst({ "cacheName":"font-awesome", plugins: [new workbox.expiration.Plugin({"maxAgeSeconds":300,"purgeOnQuotaError":false})] }), 'GET');
+workbox.routing.registerRoute(/icon-.*/, workbox.strategies.cacheFirst({ "cacheName":"nellow-icons", plugins: [new workbox.expiration.Plugin({"maxAgeSeconds":300,"purgeOnQuotaError":false})] }), 'GET');
+workbox.routing.registerRoute(/\.css$/, workbox.strategies.cacheFirst({ "cacheName":"css-cache", plugins: [new workbox.expiration.Plugin({"maxAgeSeconds":300,"purgeOnQuotaError":false})] }), 'GET');
