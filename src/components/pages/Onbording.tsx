@@ -21,7 +21,7 @@ class OnBording extends React.Component<Props, State> {
 
     this.state = {
       currentView: 0,
-      name: "モモノスケ"
+      name: "ねろちゃん"
     }
   }
 
@@ -31,14 +31,6 @@ class OnBording extends React.Component<Props, State> {
     }
   }
 
-  // public componentDidMount() {
-  //   const socket = io("https://socket.patra.store", {
-  //     transports: ["websocket"]
-  //   });
-  //   socket.on("hoge", (data) => {
-  //     console.log(data);
-  //   })
-  // }
   public setReactSwipe = (reactSwipe) => {
     this.reactSwipe = reactSwipe;
   }
@@ -50,7 +42,7 @@ class OnBording extends React.Component<Props, State> {
   }
 
   public onStartHandler = async () => {
-    const res = await http.postCreateUser()
+    const res = await http.postCreateUser(this.state.name)
     db.setUser(res.data);
     this.props.history.push("/");
   }

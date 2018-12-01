@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.dfccfd3f94fa706c7547d3a00a07f799.js"
+  "precache-manifest.13d459135d9ed9b34105a53ec46d3469.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "nellow-0.0.0"});

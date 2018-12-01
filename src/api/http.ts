@@ -15,8 +15,9 @@ class Http {
   /**
    * user create
    */
-  public postCreateUser(): AxiosPromise<User> {
+  public postCreateUser(name): AxiosPromise<User> {
     return this.http.post("/users", {
+      name,
       is_nellow: location.pathname === "/nellow/create"
     })
   }
@@ -24,7 +25,7 @@ class Http {
   /**
   * get user
   */
-  public getUser(id) {
+  public getUser(id): AxiosPromise<User> {
     return this.http.get(`/users/${id}`);
   }
 
@@ -58,11 +59,11 @@ class Http {
     })
   }
   
-  public sleep(id) {
+  public sleep(id): AxiosPromise<User> {
     return this.http.get(`/nellow/sleep/${id}`)
   }
 
-  public wakeup(id) {
+  public wakeup(id): AxiosPromise<User> {
     return this.http.get(`/nellow/wakeup/${id}`)
   }
 }
