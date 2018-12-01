@@ -1,4 +1,6 @@
 import * as React from "react";
+import http from "../api/http";
+import db from "../lib/db";
 
 // components
 import Sleep from "./pages/sleep";
@@ -30,6 +32,19 @@ export default class App extends React.Component<{}, State> {
 
   componentWillUnmount() {
     window.removeEventListener("deviceorientation", this.deviceorientationHandler);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.sleeping !== this.state.sleeping) {
+      const user = db.getUser()
+      if (user) {
+        if (this.state.sleeping) {
+          http.sleep(user.id)
+        } else {
+          http.wakeup(user.id)
+        }
+      }
+    }
   }
 
   updateSleepStatus = (status: boolean) => () => {
