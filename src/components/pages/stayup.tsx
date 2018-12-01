@@ -50,8 +50,8 @@ class Stayup extends React.Component<IProps, IState> {
     db.setUser(res.data);
     this.setState({ user: res.data });
     setTimeout(() => {
-      const from = this.state.amount;
-      const to = this.state.user.amount;
+      const from = 0;
+      const to = res.data.user.amount;
       let obj = {
         amount: from
       }

@@ -1,4 +1,6 @@
 import * as React from "react";
+import http from "../api/http";
+import db from "../lib/db";
 
 // components
 import Sleep from "./pages/sleep";
@@ -7,6 +9,7 @@ import Bank from "./pages/bank";
 import Settings from "./pages/settings";
 import OnBording from "./pages/Onbording";
 import NotFound from "./pages/NotFound";
+import Clear from "./pages/Clear";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -26,18 +29,6 @@ export default class App extends React.Component<{}, State> {
 
   componentDidMount() {
     window.addEventListener("deviceorientation", this.deviceorientationHandler);
-
-    setTimeout(() => {
-      this.setState({
-        sleeping: true
-      })
-    }, 1000 * 5)
-
-    setTimeout(() => {
-      this.setState({
-        sleeping: false
-      })
-    }, 2000 * 15)
   }
 
   componentWillUnmount() {
@@ -50,13 +41,21 @@ export default class App extends React.Component<{}, State> {
     })
   };
 
-  deviceorientationHandler = (e) => {
+  deviceorientationHandler = async (e) => {
+    const user = db.getUser();
     let { beta } = e;
     if(beta < 0) {
       beta *= -1;
     }
+
+    const isSleeping = !!(beta >= 150);
+    if(isSleeping) {
+      await http.sleep(user.id);
+    } else {
+      await http.wakeup(user.id);
+    }
     this.setState({
-      sleeping: !!(beta >= 150)
+      sleeping: isSleeping
     })
   }
 
@@ -71,6 +70,7 @@ export default class App extends React.Component<{}, State> {
             <Route exact={true} path="/settings" component={Settings} />
             <Route exact={true} path="/user/create" component={OnBording} />
             <Route exact={true} path="/nellow/create" component={OnBording} />
+            <Route exact={true} path="/cl" component={Clear} />
             <Route path="*" component={NotFound} />
           </Switch>
         </BrowserRouter>

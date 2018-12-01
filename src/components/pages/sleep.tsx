@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface IProps {
-  backButtonHandler: (show: boolean) => void;
+  sleep: boolean;
 }
 
 class Sleep extends React.Component<IProps> {

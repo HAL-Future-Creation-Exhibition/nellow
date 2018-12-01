@@ -13,6 +13,10 @@ class DB {
     this.user = user;
     localStorage.setItem("nellow-user-info", JSON.stringify(user));
   }
+
+  clear() {
+    localStorage.removeItem("nellow-user-info");
+  }
 }
 
 export default new DB;

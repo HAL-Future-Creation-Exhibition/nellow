@@ -57,6 +57,14 @@ class Http {
       icon
     })
   }
+  
+  public sleep(id) {
+    return this.http.get(`/nellow/sleep/${id}`)
+  }
+
+  public wakeup(id) {
+    return this.http.get(`/nellow/wakeup/${id}`)
+  }
 }
 
 export default new Http;
