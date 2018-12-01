@@ -2,6 +2,8 @@ import * as React from "react";
 import { withRouter } from "react-router-dom";
 const BANK_INFO_STORAGE_KEY = "_bNkINfo"
 import Header from "../modules/Header";
+import db from "../../lib/db";
+import { User } from "../../model/type";
 
 interface IState {
   bank: {
@@ -12,6 +14,7 @@ interface IState {
     name_first: string;
     name_last: string;
   }
+  user: User;
 }
 
 interface IProps {
@@ -33,7 +36,8 @@ class Bank extends React.Component<IProps, IState> {
     const bank = JSON.parse(localStorage.getItem(BANK_INFO_STORAGE_KEY)) || defaultValue;
 
     this.state = {
-      bank
+      bank,
+      user: db.getUser()
     }
   }
 
@@ -57,7 +61,7 @@ class Bank extends React.Component<IProps, IState> {
 
           <div className="main-content">
             <p className="amount-title">残高</p>
-            <p className="amount">¥<span>9,000</span></p>
+            <p className="amount">¥<span>{this.state.user.amount.toLocaleString()}</span></p>
             <p className="description">
               貢献して得たお金は月末に確定し<br/>
               売り上げとして反映されます。

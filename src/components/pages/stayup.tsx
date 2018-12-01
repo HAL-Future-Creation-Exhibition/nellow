@@ -7,11 +7,14 @@ import Header from "../modules/Header";
 import db from "../../lib/db";
 import { User } from "../../model/type";
 import http from "../../api/http";
+import ShareModal from "../modules/shareModal";
 
 interface IState {
   amount: number;
   menuIn: boolean;
   user: User;
+  isModalShow: boolean;
+  shareImage: string;
 }
 
 interface IProps {
@@ -22,6 +25,8 @@ class Stayup extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
+      shareImage: "",
+      isModalShow: false,
       amount: 0,
       menuIn: false,
       user: db.getUser()
@@ -65,7 +70,7 @@ class Stayup extends React.Component<IProps, IState> {
           })
         }
       })
-    }, 1000);
+    }, 200);
   }
 
   selectService = (service_id) => async () => {
@@ -78,13 +83,18 @@ class Stayup extends React.Component<IProps, IState> {
 
   onTwitterShare = async () => {
     const { user } = this.state;
+    this.onModalOpen();
     const res = await http.postTwitter(user.id, user.name, user.icon);
-    console.log(res)
-    // const text = "nellowの公式ユーザーになったよ！"
-    // const text = "佐々木希まじかわいいな"
-    // const hashtags = "未来創造展,HAL大阪,nellow"
-    // const hashtags = "佐々木希"
-    // window.open(`https://twitter.com/share?text=${text}&hashtags=${hashtags}`)
+    this.setState({
+      shareImage: res.data.url
+    })
+  }
+
+  onModalOpen = () => {
+    this.setState({ isModalShow: true })
+  }
+  onModalClose = () => {
+    this.setState({ isModalShow: false })
   }
 
   render() {
@@ -151,6 +161,7 @@ class Stayup extends React.Component<IProps, IState> {
           </div>
 
           <EditView onCloseMenu={this.onCloseMenu} in={this.state.menuIn} selectService={this.selectService} currentService={user.providing_destination.id} />
+          <ShareModal onCloseMenu={this.onModalClose} in={this.state.isModalShow} image={this.state.shareImage} />
         </div>
       </>
     )

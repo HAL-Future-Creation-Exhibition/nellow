@@ -52,7 +52,7 @@ class Http {
    * twitter share
    */
   public postTwitter(id, name, icon) {
-    return axios.post("http://localhost:4000/share", {
+    return axios.post("http://133.167.127.211:4000/share", {
       id,
       name,
       icon

@@ -42,6 +42,8 @@ export default class App extends React.Component<{}, State> {
   };
 
   deviceorientationHandler = async (e) => {
+    if(location.pathname !== "/") return;
+
     const user = db.getUser();
     let { beta } = e;
     if(beta < 0) {
@@ -49,6 +51,8 @@ export default class App extends React.Component<{}, State> {
     }
 
     const isSleeping = !!(beta >= 150);
+    if(isSleeping === this.state.sleeping) return;
+
     if(isSleeping) {
       await http.sleep(user.id);
     } else {

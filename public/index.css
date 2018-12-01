@@ -291,7 +291,7 @@ header h1 {
 
 /* bank */
 .bank-container {
-  margin-bottom: 100px;
+  padding-bottom: 100px;
 }
 .bank-container .main-content {
   width: 100%;
@@ -691,4 +691,88 @@ header h1 {
   border-bottom: 1px solid gray;
   font-family: "Lato", sans-serif;
   font-size: 1.2rem;
+}
+
+.share-modal-container {
+  z-index: 99999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.7);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+  transition: all 0.2s;
+  display: none;
+}
+.share-modal-container.active {
+  display: block;
+  animation: fadeIn 0.3s;
+}
+.share-modal-container .share-container {
+  width: 94%;
+  height: 96%;
+  position: fixed;
+  top: 2%;
+  left: 3%;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.share-modal-container .share-container h1 {
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 50px 0;
+}
+.share-modal-container .share-container .img {
+  width: 98%;
+  margin: 1% auto;
+}
+.share-modal-container .share-container .img img {
+  display: block;
+  width: 100%;
+}
+.share-modal-container .share-container .actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.share-modal-container .share-container .actions button {
+  display: block;
+  width: 90%;
+  padding: 15px 5px;
+  border: 0;
+  outline: none;
+  margin: 5px 0;
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+}
+.share-modal-container .share-container p {
+  text-align: center;
+  line-height: 2;
+  font-family: "Lato", sans-serif;
+  margin: 20px 0;
+}
+.share-modal-container .share-container .actions a {
+  text-align: center;
+  font-weight: bold;
+  display: block;
+  text-decoration: none;
+  background-color: #29B6F6;
+  color: white;
+  border-radius: 40px;
+  width: 90%;
+  padding: 15px 5px;
+  border: 0;
+  outline: none;
+  margin: 5px 0;
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+}
+.share-modal-container .share-container .actions .cancel {
+  border-radius: 40px;
+  background-color: #E0E0E0;
 }
