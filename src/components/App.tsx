@@ -26,6 +26,18 @@ export default class App extends React.Component<{}, State> {
 
   componentDidMount() {
     window.addEventListener("deviceorientation", this.deviceorientationHandler);
+
+    setTimeout(() => {
+      this.setState({
+        sleeping: true
+      })
+    }, 1000 * 5)
+
+    setTimeout(() => {
+      this.setState({
+        sleeping: false
+      })
+    }, 2000 * 15)
   }
 
   componentWillUnmount() {

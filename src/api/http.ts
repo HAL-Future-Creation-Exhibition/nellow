@@ -45,7 +45,18 @@ class Http {
       name,
       p_id: service_index
     })
-  } 
+  }
+
+  /**
+   * twitter share
+   */
+  public postTwitter(id, name, icon) {
+    return axios.post("http://localhost:4000/share", {
+      id,
+      name,
+      icon
+    })
+  }
 }
 
 export default new Http;

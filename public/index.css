@@ -484,6 +484,14 @@ header h1 {
   align-items: center;
   padding-top: 20px;
 }
+
+.settings-container .main-content .icon-loading {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .settings-container .main-content .icon {
   width: 150px;
   height: 150px;
@@ -567,10 +575,13 @@ header h1 {
   font-size: 0.9rem;
 }
 .settings-container .actions button.cancel {
-  background-color: #E0E0E0;
+  background-color: #424242;
 }
 .settings-container .actions button.save {
   background-color: #29B6F6;
+}
+.settings-container .actions button.save:disabled {
+  background-color: #E0E0E0;
 }
 
 .notfound-container {

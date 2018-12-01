@@ -36,9 +36,22 @@ class Stayup extends React.Component<IProps, IState> {
 
   componentDidMount() {
     this.getUserInfo();
+  }
+
+  onCloseMenu = () => {
+    this.setState({
+      menuIn: false
+    })
+  }
+
+  getUserInfo = async () => {
+    const { id } = this.state.user
+    const res = await http.getUser(id);
+    db.setUser(res.data);
+    this.setState({ user: res.data });
     setTimeout(() => {
-      const from = 0;
-      const to = 0;
+      const from = this.state.amount;
+      const to = this.state.user.amount;
       let obj = {
         amount: from
       }
@@ -55,25 +68,23 @@ class Stayup extends React.Component<IProps, IState> {
     }, 1000);
   }
 
-  onCloseMenu = () => {
-    this.setState({
-      menuIn: false
-    })
-  }
-
-  getUserInfo = async () => {
-    const { id } = this.state.user
-    const res = await http.getUser(id);
-    db.setUser(res.data);
-    this.setState({ user: res.data });
-  }
-
   selectService = (service_id) => async () => {
     const { user } = this.state;
     const res = await http.patchUserInfo(user.id, user.name, service_id);
     db.setUser(res.data);
     this.setState({ user: res.data });
     this.onCloseMenu();
+  }
+
+  onTwitterShare = async () => {
+    const { user } = this.state;
+    const res = await http.postTwitter(user.id, user.name, user.icon);
+    console.log(res)
+    // const text = "nellowの公式ユーザーになったよ！"
+    // const text = "佐々木希まじかわいいな"
+    // const hashtags = "未来創造展,HAL大阪,nellow"
+    // const hashtags = "佐々木希"
+    // window.open(`https://twitter.com/share?text=${text}&hashtags=${hashtags}`)
   }
 
   render() {
@@ -129,7 +140,7 @@ class Stayup extends React.Component<IProps, IState> {
                   </Link>
                 </div>
 
-                <div className="twitter-share disabled">
+                <div className="twitter-share" onClick={this.onTwitterShare}>
                   <div className="icon-wrapper">
                     <i className="fab fa-twitter" style={{ fontSize: "16px" }} />
                   </div>
