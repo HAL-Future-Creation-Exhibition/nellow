@@ -31,15 +31,11 @@ export default class App extends React.Component<{}, State> {
   }
 
   componentDidMount() {
-    if(!this.state.user.is_nellow) {
-      window.addEventListener("deviceorientation", this.deviceorientationHandler);
-    }
+    window.addEventListener("deviceorientation", this.deviceorientationHandler);
   }
 
   componentWillUnmount() {
-    if(!this.state.user.is_nellow) {
-      window.removeEventListener("deviceorientation", this.deviceorientationHandler);
-    }
+    window.removeEventListener("deviceorientation", this.deviceorientationHandler);
   }
 
   updateSleepStatus = (status: boolean) => () => {
@@ -49,6 +45,7 @@ export default class App extends React.Component<{}, State> {
   };
 
   deviceorientationHandler = async (e) => {
+    if(this.state.user && this.state.user.is_nellow) return;
     if(location.pathname !== "/") return;
 
     const user = db.getUser();
