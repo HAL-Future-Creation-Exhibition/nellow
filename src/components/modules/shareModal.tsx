@@ -18,12 +18,12 @@ export default class ShareModal extends React.Component<Props> {
       <div className={this.props.in ? 'share-modal-container active' : 'share-modal-container'}>
         <div className="share-container">
 
-          <h1>OFFICIAL NELLOWER</h1>
+          <h1>OFFICIAL NELLER</h1>
           {this.props.image === "" ? (
             <p>画像を生成中...</p>
           ) : (
             <div className="img">
-              <img src={this.props.image} alt="nellower 認定証"/>
+              <img src={this.props.image} alt="neller 認定証"/>
             </div>
           )}
 
