@@ -1,6 +1,7 @@
 import * as React from "react";
 import http from "../api/http";
 import db from "../lib/db";
+import IO from "../lib/socket";
 
 // components
 import Sleep from "./pages/sleep";
@@ -31,6 +32,19 @@ export default class App extends React.Component<{}, State> {
   }
 
   componentDidMount() {
+    const socket = IO.getSocket();
+    socket.on("nellow_sleep", (res) => {
+      const response = JSON.parse(res);
+      if(response.user.is_nellow && db.getUser().is_nellow) {
+        this.setState({ sleeping: true });
+      }
+    })
+    socket.on("nellow_wakeup", (res) => {
+      const response = JSON.parse(res);
+      if(response.user.is_nellow && db.getUser().is_nellow) {
+        this.setState({ sleeping: false });
+      }
+    })
     window.addEventListener("deviceorientation", this.deviceorientationHandler);
   }
 
