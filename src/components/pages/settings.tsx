@@ -97,7 +97,7 @@ class Settings extends React.Component<Props, State> {
             ) : (
               <>
                 <button className="cancel" onClick={this.cancel}>キャンセル</button>
-                <button className="save" disabled={this.state.user.name.length === 0 || this.state.user.name.length > 10} onClick={this.save}>保存する</button>
+                <button className="save" disabled={this.state.user.name.length === 0 || this.state.user.name.length > 10 || this.state.iconLoading} onClick={this.save}>保存する</button>
               </>
             )}
           </div>
