@@ -70,7 +70,7 @@ class OnBording extends React.Component<Props, State> {
           </div>
           <div className="guide-view">
             <h2>名前をつけよう</h2>
-            <input type="text" value={this.state.name} onChange={this.onInputChangeHandler} placeholder="モモノスケ" />
+            <input type="text" value={this.state.name} onChange={this.onInputChangeHandler} placeholder="ねろちゃん" />
             <p>
               ニックネームはnellowを<br/>あなただけのものにするために重要なことです！
             </p>

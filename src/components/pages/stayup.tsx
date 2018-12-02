@@ -8,6 +8,7 @@ import db from "../../lib/db";
 import { User } from "../../model/type";
 import http from "../../api/http";
 import ShareModal from "../modules/shareModal";
+import * as io from "socket.io-client";
 
 interface IState {
   amount: number;
@@ -42,6 +43,19 @@ class Stayup extends React.Component<IProps, IState> {
 
   componentDidMount() {
     this.getUserInfo();
+
+    const socket = io.connect("https://socket.patra.store", {
+      transports: ["websocket"]
+    });
+    socket.on("nellow_wakeup", (res) => {
+      console.log("nellow_wakeup")
+      const response = JSON.parse(res);
+      console.log(response.user.is_nellow)
+      console.log(db.getUser().is_nellow);
+      if(response.user.is_nellow && db.getUser().is_nellow) {
+        this.getUserInfo();
+      }
+    })
   }
 
   onCloseMenu = () => {
