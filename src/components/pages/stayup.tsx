@@ -24,6 +24,7 @@ interface IProps {
 class Stayup extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
+
     this.state = {
       shareImage: "",
       isModalShow: false,

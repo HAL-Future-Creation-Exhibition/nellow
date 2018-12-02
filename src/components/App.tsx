@@ -12,9 +12,11 @@ import NotFound from "./pages/NotFound";
 import Clear from "./pages/Clear";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { User } from "../model/type";
 
 interface State {
   sleeping: boolean;
+  user: User;
 }
 
 export default class App extends React.Component<{}, State> {
@@ -23,16 +25,21 @@ export default class App extends React.Component<{}, State> {
     super(props);
 
     this.state = {
-      sleeping: false
+      sleeping: false,
+      user: db.getUser()
     }
   }
 
   componentDidMount() {
-    window.addEventListener("deviceorientation", this.deviceorientationHandler);
+    if(!this.state.user.is_nellow) {
+      window.addEventListener("deviceorientation", this.deviceorientationHandler);
+    }
   }
 
   componentWillUnmount() {
-    window.removeEventListener("deviceorientation", this.deviceorientationHandler);
+    if(!this.state.user.is_nellow) {
+      window.removeEventListener("deviceorientation", this.deviceorientationHandler);
+    }
   }
 
   updateSleepStatus = (status: boolean) => () => {
